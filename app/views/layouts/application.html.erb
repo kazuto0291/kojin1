@@ -8,8 +8,17 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <header class="header">
+      <div class="header__title">
+        <%= link_to "Blog", '#', class: "header__title--text" %>
+      </div>
+      <div class="header__right">
+        <%= link_to "新規投稿", '#', class: "header__right--ben" %>
+      </div>
+    </header>
+    <div class="contents">
+      <%= yield %>
+    </div>
   </body>
 </html>
