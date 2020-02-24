@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
   def index
+    # @ビューで使うため
     @posts = Post.all
   end
 
@@ -14,7 +15,27 @@ class PostsController < ApplicationController
   end
 
   def show
+    # @ビューで使うため
     @post = Post.find(params[:id])
+  end
+
+  def edit
+    # @ビューで使うため
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    # postには編集したいレコードの情報が入る
+    post = Post.find(params[:id])
+    # postをupdateメソッドによって更新しています
+    post.update(post_params)
+    redirect_to post_path(post.id)
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to root_path
   end
 
   private
