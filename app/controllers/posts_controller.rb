@@ -15,6 +15,8 @@ before_action :set_post, only: [:edit, :show]
   end
 
   def show
+    @comment = Comment.new
+    # @comments =@post.comment.includes(:user)
   end
 
   def edit
