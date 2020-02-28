@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-
+before_action :set_post, only: [:edit, :show]
+# before_action :move_to_index, except: [:index, :show, :search]
   def index
-    # @ビューで使うため
-    @posts = Post.includes(:user)
+    @posts = Post.includes(:user).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -15,13 +15,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    # @ビューで使うため
-    @post = Post.find(params[:id])
   end
 
   def edit
-    # @ビューで使うため
-    @post = Post.find(params[:id])
+  end
+
+  def search
+    @posts = Post.search(params[:keyword])
   end
 
   def update
@@ -43,4 +43,19 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content).merge(user_id: current_user.id)
   end
 
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # def move_to_index
+  #   redirect_to action: :index unless user_signed_in?
+  # end
+
 end
+
+
+
