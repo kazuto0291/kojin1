@@ -6,6 +6,13 @@
 </div>
 <div class="postAuthor">
 </div>
+<div class="postManage">
+<% if user_signed_in? && current_user.id == @post.user_id %>
+<%# 「ユーザーがログインしている」かつ「ログインしているユーザーと投稿したユーザーが一致している」 %>
+  <%= link_to "編集", edit_post_path(@post.id), class: "postManage__edit"%>
+  <%= link_to "削除", post_path(@post.id), method: :delete, class:"postManage__delete"%>
+<div>
+<% end %>
 <div class="postText">
   <%= simple_format @post.content %>
 </div>
